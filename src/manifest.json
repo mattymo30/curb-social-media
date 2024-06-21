@@ -4,8 +4,11 @@
   "version": "1.0.0",
   "manifest_version": 3,
   "permissions": [
-    "tabs",
-    "*://*/*"
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
   ],
   "action": {
     "default_popup": "html/main.html"

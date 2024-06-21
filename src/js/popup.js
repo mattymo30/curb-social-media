@@ -1,4 +1,4 @@
-console.log("This is a popup!");
+
 
 async function getCurrTab() {
     let queryOptions = {active: true, currentWindow: true};
