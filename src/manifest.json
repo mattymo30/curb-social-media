@@ -8,6 +8,6 @@
     "*://*/*"
   ],
   "action": {
-    "default_popup": "main.html"
+    "default_popup": "html/main.html"
   }
 }
