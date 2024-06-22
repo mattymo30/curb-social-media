@@ -8,6 +8,7 @@ h1, h2 {
 
 li {
     list-style-type: none;
+    text-align: center;
 }
 
 .button-table {
