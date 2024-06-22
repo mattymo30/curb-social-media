@@ -1,0 +1,19 @@
+.new-site-entry-container {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.new-site-entry-container label, 
+.new-site-entry-container input {
+    width: 80%;
+    
+}
+
+.return-btn {
+    align-self: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+}
