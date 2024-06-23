@@ -3,6 +3,18 @@ document.addEventListener('DOMContentLoaded', function() {
     let num_sites = 0;
     let index = 0;
 
+    let nextBtn = document.getElementById('next-btn');
+    let prevBtn = document.getElementById('prev-btn');
+    let deleteBtn = document.getElementById('delete-btn');
+    
+    if (nextBtn && prevBtn && deleteBtn) {
+        nextBtn.addEventListener('click', next);
+        prevBtn.addEventListener('click', prev);
+        deleteBtn.addEventListener('click', deleteSite);
+    } else {
+        console.error('One or more buttons not found.');
+    }
+
     function getSites(callback) {
         chrome.storage.sync.get('sites', function(result) {
             sites = result.sites || [];
@@ -23,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function displaySite() {
         if (num_sites === 0) {
             console.log('No sites saved!');
+            window.location.href = 'main.html';
             return;
         }
 
@@ -50,7 +63,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function deleteSite() {
 
         if (num_sites === 0) {
+            alert('You have no saved sites!');
             console.log('No sites to delete.');
+            window.location.href = 'main.html';
             return;
         }
 
@@ -64,7 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Site deleted successfully!');  
             getSites();
             if (num_sites === 0) {
-                index = 0; // Reset index if no sites left
+                alert('You have no saved sites!');
+                window.location.href = 'main.html';
             } else if (index >= sites.length) {
                 index = sites.length - 1; // Adjust index if out of bounds
             } else {
@@ -72,10 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    document.getElementById('next-btn').addEventListener('click', next);
-    document.getElementById('prev-btn').addEventListener('click', prev);
-    document.getElementById('delete-btn').addEventListener('click', deleteSite);
 
     getSites(function() {
         displaySite();

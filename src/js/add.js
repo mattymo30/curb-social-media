@@ -17,11 +17,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
             chrome.storage.sync.set({ 'sites': sites }, function() {
                 if (chrome.runtime.lastError) {
-                    console.error('Error saving sites:', chrome.runtime.lastError);
+                    console.error('Error saving site:', chrome.runtime.lastError);
                 } else {
                     console.log('Site added successfully:', { name: siteName, url: siteURL });
                     alert('Site added successfully!');
                     form.reset();
+                }
+            });
+
+            chrome.runtime.sendMessage({
+                action: 'addSite'
+            }, function(response) {
+                console.log(response);
+                if (response && response.success) {
+                    console.log("sites updated");
+                } else {
+                    console.error("No saved sites");
+                    alert('You have no saved sites to edit!');
                 }
             });
 

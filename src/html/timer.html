@@ -9,8 +9,23 @@
     <body>
         <h1>Set Timer</h1>
 
+        <div class="new-timer-container">
+            <form id="add-timer-form">
+                <label for="timer-name">Timer Name:</label>
+                <input type="text" id="timer-name" name="timer-name" required>
+                <label for="timer-length">Length (In Minutes):</label>
+                <input type="number" id="timer-length" name="timer-length" required>
+                <label for="timer-sites">Sites to be Accessed (One Per Line):</label>
+                <textarea id="timer-sites" name="timer-sites" required></textarea>
+                <label for="save-timer">Save Timer?</label>
+                <input type="checkbox" id="save-timer" name="save-timer">
+                <button type="submit">Set Timer</button>
+        </div>
+
+        <button>Saved Timers</button>
 
         <button class="return-btn" id="return-btn">Back</button>
         <script src="../js/nav.js"></script>
+        <script src="../js/timer.js"></script>
     </body>
 </html>
