@@ -97,6 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = 'main.html';
             } else if (index >= sites.length) {
                 index = sites.length - 1; // Adjust index if out of bounds
+            } else if (index === 0) {
+                index = 0;
             } else {
                 prev();
             }

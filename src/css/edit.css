@@ -1,0 +1,20 @@
+
+
+.site-container {
+    display: flex;
+    flex-direction: column; /* Arrange items in a column */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+
+}
+
+.navigation-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.return-button {
+    display: flex;
+    margin-top: 10px;
+}
