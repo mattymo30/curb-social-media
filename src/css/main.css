@@ -1,14 +1,22 @@
 body {
     width: 20rem;
+    opacity: 1;
 }
 
-h1, h2 {
+.main-container {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+}
+
+h1, h2, h3,
+.active-sites-title {
     text-align: center;
 }
 
 li {
     list-style-type: none;
-    text-align: center;
 }
 
 .button-table {
@@ -19,7 +27,22 @@ li {
     text-align: center;
 }
 
+#site-list {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
 
 button {
     width: 100px;
+    border-radius: 6px;
+    color: black;
+    background: transparent;
+    border: 2px solid #324680;
+    transition-duration: 0.2s;
+}
+
+button:hover {
+    background-color: #324680;
+    color: #ddd;
 }

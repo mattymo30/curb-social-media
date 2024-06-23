@@ -7,22 +7,25 @@
         <link rel="stylesheet" href="../css/main.css" />
     </head>
     <body>
-        <h1 class="title">Curb-Social-Media</h1>
-        <h2 class="active-sites-title">Current Blocked Sites:</h2>
-        <ul id="site-list"></ul>
-        <table class="button-table">
-            <tr>
-                <th><button id="add-btn">Add Sites</button></th>
-                <th><button id="edit-btn">Edit Sites</button></th>
-            </tr>
-            <tr>
-                <th><button id="timer-btn">Set Timer</button></th>
-                <th><button>Statistics</button></th>
-            </tr>
-            <tr>
-                <th colspan="2"><button>Settings</button></th>
-            </tr>
-        </table>
+        <div class="main-container">
+            <h1 class="title">Curb Social Media</h1>
+            <h2 class="active-sites-title" id="active-sites-title">Current Blocked Sites:</h2>
+            <ul id="site-list"></ul>
+            <h2 class="timer-title">Timer: <span id="timer-on-off"></span></h2>
+            <h3 class="time-remaining"><span id="time-remaining"></h3>
+
+
+            <table class="button-table">
+                <tr>
+                    <th><button id="add-btn">Add Sites</button></th>
+                    <th><button id="edit-btn">View Sites</button></th>
+                </tr>
+                <tr>
+                    <th><button id="timer-btn">Set Timer</button></th>
+                    <th><button id="about-btn">About</button></th>
+                </tr>
+            </table>
+        </div>
         <script src="../js/popup.js"></script>
         <script src="../js/nav.js"></script>
     </body>

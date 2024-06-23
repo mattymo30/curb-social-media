@@ -25,12 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
 
-    function update(callback) {
-        chrome.storage.sync.get('sites', function(result) {
-            sites = result.sites || [];
-            num_sites = sites.length;
-        });
-    }
 
     function displaySite() {
         if (num_sites === 0) {

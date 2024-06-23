@@ -1,0 +1,32 @@
+.new-timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.new-timer-container label,
+.new-timer-container input {
+    width: 70%
+}
+
+#add-timer-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#add-timer-form label,
+#add-timer-form input {
+    width: 100%;
+}
+
+#add-timer-form input[type="submit"] {
+    width: 70%;
+    margin-top: 10px;
+}
+
+.return-button {
+    display: flex;
+    margin-top: 10px;
+}
