@@ -1,6 +1,7 @@
 let sites = [];
 let timerActiveSites = [];
 let onTimer = false;
+let now = new Date();
 
 chrome.storage.sync.get('sites', function(result) {
     sites = result.sites || [];
@@ -17,10 +18,25 @@ function updateSites(newSites) {
     });
 }
 
+function withinTimeRange(currTime, start, end) {
+    
+    return (currTime > start && currTime < end);
+}
+
 function checkBlockedSite(url) {
+
+    now = new Date();
+    const currTime = `${now.getHours()}:${now.getMinutes()}`;
+    console.log(currTime);
     for (let site of sites) {
         if (url.includes(site.url)) {
-            return true;
+            if (site.startTime && site.endTime) {
+                if (withinTimeRange(currTime, site.startTime, site.endTime)) {
+                    return true;
+                }
+            } else {
+                return true;
+            }
         }
     }
 
@@ -30,7 +46,7 @@ function checkBlockedSite(url) {
 // check for allowed sites when using a timer
 function isAllowed(url) {
     for (let site of timerActiveSites) {
-        if(url.includes(site)) {
+        if(url.includes(site.url)) {
             return true;
         }
     }
@@ -39,9 +55,7 @@ function isAllowed(url) {
 }
 
 chrome.tabs.onActivated.addListener( function(activeInfo){
-    console.log(onTimer);
     chrome.tabs.get(activeInfo.tabId, function(tab) {
-        console.log('Is blocked', checkBlockedSite(tab.url));
         if (!onTimer && tab.url && checkBlockedSite(tab.url)) {
             console.log("Blocked Site Detected: ", tab.url);
             chrome.tabs.update(tab.id, { url: '../html/blocked-site.html' });
@@ -53,7 +67,6 @@ chrome.tabs.onActivated.addListener( function(activeInfo){
 });
 
 chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
-    console.log(onTimer);
     if (!onTimer && change.url && checkBlockedSite(change.url)) {
         console.log("Blocked Site Detected: ", change.url);
         chrome.tabs.update(tabId, { url: '../html/blocked-site.html' });
@@ -65,9 +78,6 @@ chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
 
 });
 
-function checkTimerSites() {
-
-}
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.action === 'startTimer') {
@@ -88,6 +98,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
         // Set active timer sites
         timerActiveSites = timerSites;
+        onTimer = true;
 
         // Respond with success
         sendResponse({ success: true });
@@ -105,7 +116,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         return false;
     }
 
-    if (request.action === 'addSite') {
+    if (request.action === 'updateSites') {
         chrome.storage.sync.get('sites', function(result) {
             sites = result.sites || [];
         });

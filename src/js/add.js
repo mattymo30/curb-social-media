@@ -6,13 +6,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const siteName = document.getElementById('site-name').value;
         const siteURL = document.getElementById('site-url').value;
+        const startTime = document.getElementById('start-time').value;
+        const endTime = document.getElementById('end-time').value;
+
+        if ((startTime && !endTime) || (!startTime && endTime)) {
+            event.preventDefault();
+            alert("Start/End Times must both be filled or left empty to continue.");
+            return;
+        }
 
         chrome.storage.sync.get('sites', function(result) {
             let sites = result.sites || [];
 
+            
+
             sites.push({
                 name: siteName,
-                url: siteURL
+                url: siteURL,
+                startTime: startTime,
+                endTime: endTime
             });
 
             chrome.storage.sync.set({ 'sites': sites }, function() {
@@ -26,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             chrome.runtime.sendMessage({
-                action: 'addSite'
+                action: 'updateSites'
             }, function(response) {
                 console.log(response);
                 if (response && response.success) {

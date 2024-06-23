@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let currSite = sites[index];
         document.getElementById('site-name').textContent = currSite.name;
         document.getElementById('site-url').textContent = currSite.url;
+        document.getElementById('start-time').textContent = currSite.startTime || "None";
+        document.getElementById('end-time').textContent = currSite.endTime || "None";
     }
 
     function next() {
@@ -76,7 +78,19 @@ document.addEventListener('DOMContentLoaded', function() {
             } 
 
             console.log('Site deleted successfully');
-            alert('Site deleted successfully!');  
+            alert('Site deleted successfully!');
+            
+            chrome.runtime.sendMessage({
+                action: 'updateSites'
+            }, function(response) {
+                console.log(response);
+                if (response && response.success) {
+                    console.log("sites updated");
+                } else {
+                    console.error("Error updating site");
+                    alert("Error updating site");
+                }
+            });
             getSites();
             if (num_sites === 0) {
                 alert('You have no saved sites!');
